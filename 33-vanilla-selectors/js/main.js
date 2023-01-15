@@ -4,23 +4,13 @@ import "../css/custom.css";
 import $ from "jquery";
 
 import { countChars, iterateNodes } from "./utils";
+import { initCommon } from "./modules/filters";
 
 var CodelyBackoffice = {
   /*******************************************************************************************************************
    * Common features
    ******************************************************************************************************************/
-  initCommon: function () {
-    /**
-     * Show/hide an element based on a change in another field.
-     */
-    var trigger = document.querySelector(".js-trigger-container");
-
-    trigger.addEventListener("click", function () {
-      document
-        .getElementById(trigger.getAttribute("rel"))
-        .classList.toggle("hidden");
-    });
-  },
+  
   /*******************************************************************************************************************
    * Common forms functions
    ******************************************************************************************************************/
@@ -72,26 +62,7 @@ var CodelyBackoffice = {
       );
     });
   },
-  /*******************************************************************************************************************
-   * Filter courses by category
-   ******************************************************************************************************************/
-  initCategoryFilter: function () {
-    var filter = document.getElementById("category");
-
-    filter.addEventListener("change", function () {
-      var category = this.value;
-
-      var elementsToFilter = document.querySelectorAll(".js-filtered-item");
-
-      iterateNodes(elementsToFilter, function (element) {
-        if (category && category !== element.getAttribute("data-category")) {
-          element.classList.add("hidden");
-        } else {
-          element.classList.remove("hidden");
-        }
-      });
-    });
-  },
+  
   /*******************************************************************************************************************
    * Create user form
    ******************************************************************************************************************/
@@ -181,7 +152,7 @@ var CodelyBackoffice = {
  * Init functions
  */
 window.addEventListener("DOMContentLoaded", () => {
-  CodelyBackoffice.initCommon();
+  initCommon();
 
   if (document.getElementById("category")) {
     CodelyBackoffice.initCategoryFilter();
